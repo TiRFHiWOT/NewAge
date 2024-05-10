@@ -1,10 +1,7 @@
 "use client";
-import { useState } from "react";
 import { motion } from "framer-motion";
 
 const Test = () => {
-  const [hover, setHover] = useState("");
-
   return (
     <section>
       <div className="flex flex-col justify-center items-center relative">
