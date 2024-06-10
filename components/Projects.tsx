@@ -33,7 +33,7 @@ const Projects = () => {
             background: `url(${"/arrow.png"})`,
           }}
         >
-          {[...Array(6)].map((_, index) => (
+          {[...Array(3)].map((_, index) => (
             <div
               key={index}
               className=" relative max-w-[20rem] h-[20rem] border self-center rounded-full border-gray-800 hover:-translate-y-5 backdrop-blur-sm transition-all duration-700

@@ -23,17 +23,17 @@ const Test = () => {
           style={{
             background: `url(${"/blue.jpg"})`,
             backgroundSize: "cover",
-            backgroundPositionX: "-73px",
+            backgroundPositionX: "-40px",
             backgroundPositionY: "-11px",
           }}
         >
           <motion.div
-            className="grid grid-cols-2 gap-2 p-3 border border-gray-900 rounded-xl bg-transparent relative"
+            className="grid grid-cols-2 p-3 border border-gray-900 rounded-xl relative"
             initial={{ rotate: "180deg", scale: 0, gap: 0, opacity: 0 }}
             whileInView={{
               rotate: ["180deg", "180deg", "180deg", "0"],
               scale: 1,
-              gap: "0",
+              gap: "0.5rem",
               opacity: 1,
             }}
             transition={{
@@ -48,25 +48,34 @@ const Test = () => {
                 whileInView={{
                   width: "27rem",
                   height: "16.5rem",
-                  x: index === 1 ? "0px" : index === 0 ? "0px" : "",
-                  y: index === 1 ? "0px" : index === 0 ? "0px" : "",
+                  transition: { duration: 2, delay: 3 },
                 }}
-                transition={{
-                  duration: 2,
-                  delay: 3,
+                whileHover={{
+                  x:
+                    index === 0
+                      ? "-20px"
+                      : index === 1
+                      ? "20px"
+                      : index === 2
+                      ? "-20px"
+                      : index === 3
+                      ? "20px"
+                      : "",
+                  y:
+                    index === 0
+                      ? "-20px"
+                      : index === 1
+                      ? "-20px"
+                      : index === 2
+                      ? "20px"
+                      : index === 3
+                      ? "20px"
+                      : "",
+                  transition: { duration: 2 },
                 }}
                 viewport={{ once: true }}
-                className={`min-w-[15rem] min-h-[15rem] bg-[#151b24] shadow-2xl rounded-md bg-opacity-50 relative backdrop-blur border-black ${
-                  index === 0
-                    ? "border-e-2 border-b-2"
-                    : index === 1
-                    ? "border-s-2 border-b-2"
-                    : index === 2
-                    ? "border-e-2 border-t-2"
-                    : index === 3
-                    ? "border-s-2 border-t-2"
-                    : ""
-                } hover:-translate-y-5 cursor-pointer group`}
+                className={`min-w-[15rem] min-h-[15rem] rounded-lg bg-[#151b24] shadow-2xl bg-opacity-50 relative backdrop-blur border-2 border-black
+                 hover:border-white hover:border-2 hover:rotate-6 inline-block cursor-pointer group`}
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -106,7 +115,7 @@ const Test = () => {
               </motion.div>
             ))}
             <div
-              className="absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[5rem] h-[5rem] rounded-full bg-gray-700 flex justify-center items-center opacity-80"
+              className="absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] w-[5rem] h-[5rem] rounded-full bg-gray-700 flex justify-center items-center opacity-50"
               style={{ boxShadow: "0px 0px 50px -10px black" }}
             >
               <div className="w-[4rem] h-[4rem] rounded-full bg-gray-600 flex justify-center items-center">

@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Home from "@/components/Home";
+import Expert from "@/components/Expert";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Test from "@/components/Test";
@@ -13,6 +14,7 @@ const page = () => {
       <Home />
       <About />
       <Projects />
+      <Expert />
       <Test />
       <Contact />
       <Footer />

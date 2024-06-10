@@ -44,7 +44,7 @@ const Navbar = () => {
             </div>
             <Link
               href={""}
-              className="text-gray-400  border-2 border-orange-600 hover:bg-orange-600 hover:text-white rounded-full py-1 px-6"
+              className="text-gray-400 w-fit border-2 border-orange-600 hover:bg-orange-600 hover:text-white rounded-full py-1 px-6"
             >
               GO DOWN
             </Link>
