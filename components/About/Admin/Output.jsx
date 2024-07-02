@@ -1,10 +1,11 @@
+"use client";
 import Image from "next/image";
 import { useState } from "react";
-import { uploadImage, removeImage, updateProjectImages } from "./Firebase";
+import { uploadImage, removeImage, updateAboutItem } from "../Firebase";
 import { FiPlus, FiX } from "react-icons/fi";
 
-const Project = ({ proj, handleEdit, handleRemove }) => {
-  const [imageUrls, setImageUrls] = useState(proj.imageUrls || []);
+const Output = ({ aboutItem, handleEdit, handleRemove }) => {
+  const [imageUrls, setImageUrls] = useState(aboutItem.imageUrls || []);
   const [loading, setLoading] = useState(false);
 
   const handleImageRemove = async (index) => {
@@ -14,7 +15,10 @@ const Project = ({ proj, handleEdit, handleRemove }) => {
     const newImageUrls = imageUrls.filter((_, i) => i !== index);
     setImageUrls(newImageUrls);
 
-    await updateProjectImages(proj.id, newImageUrls);
+    await updateAboutItem(aboutItem.id, {
+      ...aboutItem,
+      imageUrls: newImageUrls,
+    });
   };
 
   const handleImageAdd = async (e) => {
@@ -27,8 +31,16 @@ const Project = ({ proj, handleEdit, handleRemove }) => {
     const updatedImageUrls = [...imageUrls, ...newImageUrls];
     setImageUrls(updatedImageUrls);
 
-    await updateProjectImages(proj.id, updatedImageUrls);
+    await updateAboutItem(aboutItem.id, {
+      ...aboutItem,
+      imageUrls: updatedImageUrls,
+    });
     setLoading(false);
+  };
+
+  const handleEditClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    handleEdit({ ...aboutItem, imageUrls });
   };
 
   return (
@@ -44,7 +56,7 @@ const Project = ({ proj, handleEdit, handleRemove }) => {
             <div key={index} className="relative w-24 h-24 group">
               <Image
                 src={url}
-                alt={`${proj.name} project image ${index + 1}`}
+                alt={`Image ${index + 1}`}
                 layout="fill"
                 objectFit="cover"
                 className="rounded-lg"
@@ -67,33 +79,16 @@ const Project = ({ proj, handleEdit, handleRemove }) => {
             <FiPlus className="text-gray-400" />
           </div>
         </div>
-
-        <div className="rounded-md py-2 px-3 shadow-lg border border-gray-700 mb-4">
-          <h4 className="text-xl text-gray-100 font-semibold py-1 tracking-wider">
-            {proj.name}
-          </h4>
-          <p className="text-gray-200 ml-4 py-1">{proj.description}</p>
-          <p className="text-gray-300 ml-4 py-1">
-            <a href={proj.vercelUrl} target="_blank" rel="noopener noreferrer">
-              {proj.vercelUrl}
-            </a>
-          </p>
-          <p className="text-gray-400 ml-4 py-1">
-            <a href={proj.githubUrl} target="_blank" rel="noopener noreferrer">
-              {proj.githubUrl}
-            </a>
-          </p>
-        </div>
       </div>
       <div className="flex justify-end space-x-4 mt-2">
         <button
-          onClick={() => handleEdit({ ...proj, imageUrls })}
+          onClick={handleEditClick}
           className="py-2 px-4 text-gray-200 border-2 bg-yellow-600 border-yellow-700 rounded-lg hover:bg-yellow-700 hover:text-white"
         >
           Edit
         </button>
         <button
-          onClick={() => handleRemove(proj.id)}
+          onClick={() => handleRemove(aboutItem.id)}
           className="py-2 px-4 text-gray-200 border-2 bg-red-600 border-red-700 rounded-lg hover:bg-red-700 hover:text-white"
         >
           Remove
@@ -103,4 +98,4 @@ const Project = ({ proj, handleEdit, handleRemove }) => {
   );
 };
 
-export default Project;
+export default Output;

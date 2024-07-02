@@ -1,11 +1,11 @@
-import Navbar from "@/components/Navbar";
-import Home from "@/components/Home";
-import Expert from "@/components/Expert";
-import About from "@/components/About";
-import Projects from "@/components/projects/Projects";
-import Test from "@/components/Test";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar/Navbar";
+import Home from "@/components/Landing/Home";
+import Expert from "@/components/Expertise/Home/Expert";
+import About from "@/components/About/Home/About";
+import Projects from "@/components/Projects/Home/Projects";
+import Test from "@/components/Testimonials/Home/Test";
+import Contact from "@/components/Contact/Contact";
+import Footer from "@/components/Footer/Footer";
 
 const page = () => {
   return (

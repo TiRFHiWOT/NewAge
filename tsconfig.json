@@ -21,6 +21,20 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Navbar.tsx", "components/Home.tsx", "components/Particles.jsx", "app/admin/page.jsx", "components/projects/Projects.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "components/Navbar/Navbar.tsx",
+    "components/Landing/Home.tsx",
+    "components/Particles.jsx",
+    "app/admin/page.jsx",
+    "components/Projects/Home/Projects.jsx",
+    "components/Testimonials/Home/Test.jsx",
+    "components/Expertise/Home/Expert.jsx",
+    "components/Testimonials/Home/Test.jsx",
+    "components/About/Admin/Page.jsx"
+  ],
   "exclude": ["node_modules"]
 }

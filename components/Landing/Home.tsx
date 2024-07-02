@@ -2,7 +2,7 @@
 import { FaInstagram } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
-import HomeArt from "@/components/HomeArt";
+import HomeArt from "@/components/Landing/HomeArt";
 
 const Home = () => {
   const colorClasses = [

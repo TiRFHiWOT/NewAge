@@ -11,7 +11,7 @@ const Email = () => {
             Contact Us
           </h1>
         </div>
-        <div className="flex flex-col gap-6 p-4 min-w-[50%]">
+        <div className="flex flex-col gap-6 p-4 min-w-full lg:min-w-[50%]">
           <motion.div
             initial={{ opacity: 0, x: 200 }}
             whileInView={{ opacity: 1, x: 0 }}

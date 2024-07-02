@@ -1,40 +1,38 @@
 import React, { useState, useEffect } from "react";
 import {
-  fetchProjects,
-  addProject,
-  updateProject,
-  deleteProject,
+  fetchExpertise,
+  addExpertise,
+  updateExpertise,
+  deleteExpertise,
   uploadImage,
-} from "./Firebase";
-import ProjectForm from "./ProjectForm";
-import ProjectList from "./ProjectList";
+} from "../Firebase";
+import ExpertiseForm from "./ExpertiseForm";
+import ExpertiseList from "./ExpertiseList";
 
-const ProjectsAdmin = () => {
-  const [project, setProject] = useState({
-    name: "",
+const ExpertiseAdmin = () => {
+  const [expertise, setExpertise] = useState({
+    serviceName: "",
     description: "",
-    vercelUrl: "",
-    githubUrl: "",
     imageUrls: [],
   });
   const [showInputs, setShowInputs] = useState(false);
-  const [submittedProjects, setSubmittedProjects] = useState([]);
+  const [expertiseList, setExpertiseList] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [currentProjectId, setCurrentProjectId] = useState(null);
+  const [currentExpertiseId, setCurrentExpertiseId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [warning, setWarning] = useState("");
-  const [showProjects, setShowProjects] = useState(false);
+  const [showExpertiseList, setShowExpertiseList] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const getProjects = async () => {
-      const projectsList = await fetchProjects();
-      setSubmittedProjects(projectsList.reverse());
+    const getExpertise = async () => {
+      const expertiseData = await fetchExpertise();
+      setExpertiseList(expertiseData.reverse());
     };
 
     setIsClient(true);
 
-    getProjects();
+    getExpertise();
   }, []);
 
   if (!isClient) {
@@ -42,99 +40,84 @@ const ProjectsAdmin = () => {
   }
 
   const handleChange = (field, value) => {
-    setProject((prevProject) => ({ ...prevProject, [field]: value }));
+    setExpertise((prevExpertise) => ({ ...prevExpertise, [field]: value }));
   };
 
   const handleImageChange = (images) => {
-    setProject((prevProject) => ({ ...prevProject, imageUrls: images }));
+    setExpertise((prevExpertise) => ({ ...prevExpertise, imageUrls: images }));
   };
 
   const handleSubmit = async () => {
-    if (
-      !project.name ||
-      !project.description ||
-      !project.vercelUrl ||
-      !project.githubUrl
-    ) {
+    if (!expertise.serviceName || !expertise.description) {
       setWarning("Please fill in all fields before submitting.");
       return;
     }
     setWarning("");
     try {
       let imageUrls = [];
-      if (project.imageUrls.length > 0) {
+      if (expertise.imageUrls.length > 0) {
         imageUrls = await Promise.all(
-          project.imageUrls.map((image) => uploadImage(image))
+          expertise.imageUrls.map((image) => uploadImage(image))
         );
       }
-      const projectData = { ...project, imageUrls };
-
-      console.log("Submitting project data:", projectData);
+      const expertiseData = { ...expertise, imageUrls };
 
       if (isUpdating) {
-        await updateProject(currentProjectId, projectData);
-        setSubmittedProjects((prevProjects) =>
-          prevProjects.map((p) =>
-            p.id === currentProjectId
-              ? { ...projectData, id: currentProjectId }
-              : p
+        await updateExpertise(currentExpertiseId, expertiseData);
+        setExpertiseList((prevExpertise) =>
+          prevExpertise.map((e) =>
+            e.id === currentExpertiseId
+              ? { ...expertiseData, id: currentExpertiseId }
+              : e
           )
         );
-        alert("Project updated successfully!");
+        alert("Expertise updated successfully!");
       } else {
-        const newProject = await addProject(projectData);
-        setSubmittedProjects([newProject, ...submittedProjects]);
-        alert("Project submitted successfully!");
+        const newExpertise = await addExpertise(expertiseData);
+        setExpertiseList([newExpertise, ...expertiseList]);
+        alert("Expertise added successfully!");
       }
-      setProject({
-        name: "",
+      setExpertise({
+        serviceName: "",
         description: "",
-        vercelUrl: "",
-        githubUrl: "",
         imageUrls: [],
       });
       setShowInputs(false);
       setIsUpdating(false);
-      setCurrentProjectId(null);
+      setCurrentExpertiseId(null);
     } catch (error) {
-      console.error("Error submitting project: ", error);
-      alert("Failed to submit project");
+      console.error("Error submitting expertise: ", error);
+      alert("Failed to submit expertise");
     }
   };
 
-  const handleEdit = (proj) => {
-    setProject({
-      name: proj.name,
-      description: proj.description,
-      vercelUrl: proj.vercelUrl,
-      githubUrl: proj.githubUrl,
-      imageUrls: proj.imageUrls || [],
+  const handleEdit = (expertise) => {
+    setExpertise({
+      serviceName: expertise.serviceName,
+      description: expertise.description,
+      imageUrls: expertise.imageUrls || [],
     });
     setIsUpdating(true);
     setShowInputs(true);
-    setCurrentProjectId(proj.id);
+    setCurrentExpertiseId(expertise.id);
   };
 
   const handleRemove = async (id) => {
     try {
-      await deleteProject(id);
-      setSubmittedProjects(submittedProjects.filter((p) => p.id !== id));
-      alert("Project removed successfully!");
+      await deleteExpertise(id);
+      setExpertiseList(expertiseList.filter((e) => e.id !== id));
+      alert("Expertise removed successfully!");
     } catch (error) {
-      console.error("Error removing project: ", error);
-      alert("Failed to remove project");
+      console.error("Error removing expertise: ", error);
+      alert("Failed to remove expertise");
     }
   };
-
-  const filteredProjects = submittedProjects.filter((proj) =>
-    proj.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div>
       <div className="max-w-4xl mx-auto p-6 rounded-lg shadow-lg border-2 border-gray-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold text-white">Projects</h2>
+          <h2 className="text-2xl font-bold text-white">Expertise</h2>
           {!showInputs && (
             <button
               onClick={() => setShowInputs(true)}
@@ -142,13 +125,13 @@ const ProjectsAdmin = () => {
                 showInputs ? "bg-blue-600" : ""
               }`}
             >
-              Add Project
+              Add Expertise
             </button>
           )}
         </div>
         {showInputs && (
-          <ProjectForm
-            project={project}
+          <ExpertiseForm
+            expertise={expertise}
             handleChange={handleChange}
             handleImageChange={handleImageChange}
             handleSubmit={handleSubmit}
@@ -158,30 +141,30 @@ const ProjectsAdmin = () => {
         )}
         <div className="flex justify-between items-center mb-1">
           <button
-            onClick={() => setShowProjects(!showProjects)}
+            onClick={() => setShowExpertiseList(!showExpertiseList)}
             className={`py-2 px-4 text-gray-200 border-2 rounded-lg transition ${
-              showProjects
+              showExpertiseList
                 ? "bg-blue-500 text-white border-blue-500"
                 : "border-blue-600 hover:bg-blue-500 hover:text-white"
             }`}
           >
-            {showProjects ? "Hide Projects" : "Show Projects"}
+            {showExpertiseList ? "Hide Expertise" : "Show Expertise"}
           </button>
-          {showProjects && (
+          {showExpertiseList && (
             <input
               type="text"
               className="py-2 px-4 bg-[#2C2C2C] border-2 border-gray-600 shadow-lg rounded-full placeholder-gray-500 text-gray-300 outline-none"
-              placeholder="Search projects"
+              placeholder="Search items"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           )}
         </div>
       </div>
-      {showProjects && (
+      {showExpertiseList && (
         <div className="max-w-4xl mt-5 mx-auto p-6 rounded-lg shadow-lg border-2 border-gray-700 transition-opacity duration-300 ease-in-out opacity-100">
-          <ProjectList
-            projects={filteredProjects}
+          <ExpertiseList
+            expertiseList={expertiseList}
             handleEdit={handleEdit}
             handleRemove={handleRemove}
           />
@@ -191,4 +174,4 @@ const ProjectsAdmin = () => {
   );
 };
 
-export default ProjectsAdmin;
+export default ExpertiseAdmin;

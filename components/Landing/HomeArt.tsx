@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HomeArt = () => {
   return (
-    <div className="flex justify-center items-center -rotate-12 opacity-70">
+    <div className="justify-center items-center -rotate-12 opacity-70 hidden lg:flex">
       <motion.ul className="w-96 grid gap-y-0.5 border border-[#334155] rounded-full">
         <motion.li
           initial={{ x: 0 }}

@@ -11,6 +11,7 @@ const About = () => {
   return (
     <section>
       <div
+        id="About"
         className="p-10"
         style={{
           background: `url(${"/star.png"})`,

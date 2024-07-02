@@ -7,37 +7,35 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
-import AdminPage from "@/components/admin/adminPage";
-import ProjectsAdmin from "@/components/projects/Admin";
-import About from "@/components/admin/AboutPage";
-import Expertise from "@/components/admin/ExpertisePage";
-import Testimonials from "@/components/admin/TestimonialsPage";
+import Dashboard from "@/components/Dashboard/Page";
+import Projects from "@/components/Projects/Admin/Page";
+import About from "@/components/About/Admin/Page";
+import Expertise from "@/components/Expertise/Admin/Page";
+import Testimonials from "@/components/Testimonials/Admin/Page";
 
 const App = () => {
+  console.log("App component rendered");
+
   return (
     <Router>
       <div className="min-h-screen p-6">
         <nav className="flex justify-around mb-10">
-          <Link to="/admin" className="text-blue-400">
-            Admin
-          </Link>
-          <Link to="/about" className="text-blue-400">
-            About
-          </Link>
-          <Link to="/projects" className="text-blue-400">
-            Projects
-          </Link>
-          <Link to="/expertise" className="text-blue-400">
-            Expertise
-          </Link>
-          <Link to="/testimonials" className="text-blue-400">
-            Testimonials
-          </Link>
+          {["Admin", "About", "Projects", "Expertise", "Testimonials"].map(
+            (page) => (
+              <Link
+                key={page}
+                to={`/${page.toLowerCase()}`}
+                className="text-blue-400"
+              >
+                {page}
+              </Link>
+            )
+          )}
         </nav>
         <Routes>
           <Route path="/" element={<Navigate to="/admin" />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/projects" element={<ProjectsAdmin />} />
+          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/expertise" element={<Expertise />} />
           <Route path="/testimonials" element={<Testimonials />} />

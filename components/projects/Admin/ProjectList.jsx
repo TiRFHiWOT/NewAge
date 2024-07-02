@@ -1,4 +1,4 @@
-import Project from "./Project";
+import Project from "./Output";
 
 const ProjectList = ({ projects, handleEdit, handleRemove }) => (
   <div className="mt-6">
