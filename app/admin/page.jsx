@@ -8,10 +8,10 @@ import {
   Navigate,
 } from "react-router-dom";
 import Dashboard from "@/components/Dashboard/Page";
-import Projects from "@/components/Projects/Admin/Page";
 import About from "@/components/About/Admin/Page";
 import Expertise from "@/components/Expertise/Admin/Page";
 import Testimonials from "@/components/Testimonials/Admin/Page";
+import ProjectsAdmin from "@/components/Projects/Admin/Page";
 
 const App = () => {
   if (typeof window === "undefined") return null;
@@ -34,7 +34,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/admin" />} />
           <Route path="/admin" element={<Dashboard />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects" element={<ProjectsAdmin />} />
           <Route path="/about" element={<About />} />
           <Route path="/expertise" element={<Expertise />} />
           <Route path="/testimonials" element={<Testimonials />} />
