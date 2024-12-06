@@ -79,7 +79,7 @@ const ExpertiseForm = ({
               height={image.height}
               objectFit="cover"
               className="rounded-lg"
-            />
+            /> 
           </div>
         ))}
       </div>

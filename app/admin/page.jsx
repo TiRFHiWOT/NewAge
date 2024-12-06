@@ -14,8 +14,7 @@ import Expertise from "@/components/Expertise/Admin/Page";
 import Testimonials from "@/components/Testimonials/Admin/Page";
 
 const App = () => {
-  console.log("App component rendered");
-
+  if (typeof window === "undefined") return null;
   return (
     <Router>
       <div className="min-h-screen p-6">
