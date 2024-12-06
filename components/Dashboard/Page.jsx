@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchExpertise } from "../Expertise/Firebase";
 import { fetchTestimonials } from "../Testimonials/Firebase";
-import { fetchProjects } from "../Projects/Firebase";
 import { fetchAboutItems } from "../About/Firebase";
+import { fetchProjects } from "../Projects/Firebase";
 
 const AdminPage = () => {
   const [totalExpertise, setTotalExpertise] = useState(0);
