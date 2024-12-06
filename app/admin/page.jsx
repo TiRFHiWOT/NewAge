@@ -11,7 +11,7 @@ import Dashboard from "@/components/Dashboard/Page";
 import About from "@/components/About/Admin/Page";
 import Expertise from "@/components/Expertise/Admin/Page";
 import Testimonials from "@/components/Testimonials/Admin/Page";
-import ProjectsAdmin from "../../components/Projects/Admin/Page";
+import ProjectsAdmin from "@/components/Projects/Admin/Page";
 
 const App = () => {
   if (typeof window === "undefined") return null;
