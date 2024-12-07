@@ -29,12 +29,12 @@
     "components/Navbar/Navbar.tsx",
     "components/Landing/Home.tsx",
     "components/Particles.jsx",
-    "app/admin/page.jsx",
+    "pages/admin/page.jsx",
     "components/Projects/Home/Projects.jsx",
     "components/Testimonials/Home/Test.jsx",
     "components/Expertise/Home/Expert.jsx",
     "components/Testimonials/Home/Test.jsx",
     "components/About/Admin/Page.jsx"
-  ],
+, "pages/_app.jsx"  ],
   "exclude": ["node_modules"]
 }
